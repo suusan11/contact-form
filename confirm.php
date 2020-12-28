@@ -1,0 +1,91 @@
+<?php
+    //indexからのセッションを受け取る準備
+    session_start();
+
+    //入力画面からのアクセスでなければ、indexに戻す
+    //（＝confirm.phpへの直接アクセスを防ぐ）
+    if(!isset($_SESSION['form'])) {
+        header('Location: index.php');
+        exit();
+    }else {
+        //indexで渡されたフォームの内容を再度変数に入れる
+        $post = $_SESSION['form'];
+    }
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        //送信ボタンが押されたら、問い合わせ確認メールを送信する
+        $to = 'me@xample.com';
+        $from = $post['email'];
+        $subject = 'お問い合わせが届きました';
+        $body = <<<EOT
+        名前： {$post['name']}
+        ふりがな： {$post['kana']}
+        メールアドレス： {$post['email']}
+        住所1： {$post['address']}
+        住所2： {$post['address2']}
+        電話番号： {$post['tel']}
+        問い合わせ内容： {$post['message']}
+        EOT;
+
+        // var_dump($body);
+        // exit();
+        // mb_send_mail($to, $subject, $body, 'From: {$from}');
+
+        //セッションを消してお礼画面へ
+        unset($_SESSION['form']);
+        header('Location: thanks.html');
+        exit();
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メールフォーム</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <main>
+        <h2 class="page__ttl">確認画面</h2>
+        <div class="confirm__wrap">
+            <form action="" method="POST">
+                <p class="confirm__txt">以下の内容で予約を受付ます。<br class="min-only">よろしければ予約完了ボタンを押してください。</p>
+                <div class="wrap__inner">
+                    <div class="wrap__item">
+                        <label>お名前</label>
+                        <p><?php echo htmlspecialchars($post['name']); ?></p>
+                    </div>
+                    <div class="wrap__item">
+                        <label>ふりがな</label>
+                        <p><?php echo htmlspecialchars($post['kana']); ?></p>
+                    </div>
+                    <div class="wrap__item">
+                        <label>Eメールアドレス</label>
+                        <p><?php echo htmlspecialchars($post['email']); ?></p>
+                    </div>
+                    <div class="wrap__item">
+                        <label>ご住所</label>
+                        <p><?php echo htmlspecialchars($post['address']); ?></p>
+                    </div>
+                    <div class="wrap__item">
+                        <label>建物名</label>
+                        <p><?php echo htmlspecialchars($post['address2']); ?></p>
+                    </div>
+                    <div class="wrap__item">
+                        <label>電話番号</label>
+                        <p><?php echo htmlspecialchars($post['tel']); ?></p>
+                    </div>
+                    <div class="wrap__item">
+                        <label>お問い合わせの概要</label>
+                        <p><?php echo nl2br(htmlspecialchars($post['message'])); ?></p>
+                    </div>
+                </div>
+                <a class="form__button button-gray" href="index.php">入力内容を変更する</a>
+                <button type="submit" class="form__button button-blue">送信する</button>
+            <form action="" method="POST">
+        </div>
+    </main>
+</body>
+</html>
