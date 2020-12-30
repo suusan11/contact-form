@@ -132,6 +132,16 @@ PAGE - CONTACT INDEX
     border: 1px solid #EBEBEB;
 }
 
+input[type="checkbox"] {
+    position: relative;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #EBEBEB;
+    line-height: 20px;
+    margin-right: 5px;
+}
+
 /* --------------------
 PAGE - CONFIRM
 -------------------- */

@@ -23,8 +23,11 @@
         if($post['tel'] === '') {
             $errMessage['tel'] = 'blank';
         }
-        if($post['select'] === 'defalut') {
+        if($post['select'] === 'defalut') { //selectの値がdefultだったら
             $errMessage['select'] = 'blank';
+        }
+        if(empty($post['check'])) { //配列が空だったら
+            $errMessage['check'] = 'blank';
         }
         if($post['message'] === '') {
             $errMessage['message'] = 'blank';
@@ -141,7 +144,7 @@
                         <span class="required__txt">必須</span>
                         <label for="select">好きな色</label>
                     </div>
-                    <select name="select">
+                    <select name="select" id="select">
                         <option value="defalut">選択してください</option>
                         <option value="赤" <?php if($post['select'] === '赤') { echo 'selected'; } ?>>赤</option>
                         <option value="ピンク" <?php if($post['select'] === 'ピンク') { echo 'selected'; } ?>>ピンク</option>
@@ -151,6 +154,20 @@
                     <?php if($errMessage['select'] === 'blank') : ?>
                     <div class="input__error">
                     <p>選択してください。</p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="form__item form__check required">
+                    <div class="c-item-top">
+                        <span class="required__txt">必須</span>
+                        <label>好きなお寿司</label>
+                    </div>
+                    <input type="checkbox" name="check[]" value="まぐろ" id="check1" <?php if(in_array('まぐろ', $post['check'])) { echo 'checked'; } ?>><label for="check1">まぐろ</label>
+                    <input type="checkbox" name="check[]" value="たい" id="check2" <?php if(in_array('たい', $post['check'])) { echo 'checked'; } ?>><label for="check2">たい</label>
+                    <input type="checkbox" name="check[]" value="たこ" id="check3" <?php if(in_array('たこ', $post['check'])) { echo 'checked'; } ?>><label for="check3">たこ</label>
+                    <?php if($errMessage['check'] === 'blank') : ?>
+                    <div class="input__error">
+                    <p>チェックしてください。</p>
                     </div>
                     <?php endif; ?>
                 </div>

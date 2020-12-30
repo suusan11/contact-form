@@ -107,6 +107,12 @@
                         <p><?php echo htmlspecialchars($post['select']); ?></p>
                     </div>
                     <div class="wrap__item">
+                        <label>今日の天気</label>
+                        <?php for($i = 0; $i < count($post['check']); $i++) : ?>
+                        <p><?php echo htmlspecialchars($post['check'][$i]); ?></p>
+                        <?php endfor;?>
+                    </div>
+                    <div class="wrap__item">
                         <label>お問い合わせの概要</label>
                         <p><?php echo nl2br(htmlspecialchars($post['message'])); ?></p>
                     </div>
