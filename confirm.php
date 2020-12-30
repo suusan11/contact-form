@@ -14,10 +14,29 @@
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         //送信ボタンが押されたら、問い合わせ確認メールを送信する
-        $to = 'me@xample.com';
-        $from = $post['email'];
-        $subject = 'お問い合わせが届きました';
-        $body = <<<EOT
+
+        //自動返信
+        $to1 = $post['email'];
+        $from1 = 'info@example.com';
+        $subject1 = 'お問い合わせありがとうございます';
+        $body1 = <<<EOT
+        ※このメールはシステムからの自動返信です。
+
+        名前： {$post['name']}
+        ふりがな： {$post['kana']}
+        メールアドレス： {$post['email']}
+        住所1： {$post['address']}
+        住所2： {$post['address2']}
+        電話番号： {$post['tel']}
+        問い合わせ内容： {$post['message']}
+        EOT;
+
+
+        //担当者宛
+        $to2 = 'info@example.com';
+        $from2 = $post['email'];
+        $subject2 = 'お問い合わせが届きました';
+        $body2 = <<<EOT
         名前： {$post['name']}
         ふりがな： {$post['kana']}
         メールアドレス： {$post['email']}
@@ -29,7 +48,11 @@
 
         // var_dump($body);
         // exit();
-        // mb_send_mail($to, $subject, $body, 'From: {$from}');
+        mb_language("Japanese");
+        mb_internal_encoding("UTF-8");
+
+        mb_send_mail($to1, $subject1, $body1, 'From: {$from1}');
+        mb_send_mail($to2, $subject2, $body2, 'From: {$from2}');
 
         //セッションを消してお礼画面へ
         unset($_SESSION['form']);
