@@ -27,6 +27,7 @@
         名前： {$post['name']}
         ふりがな： {$post['kana']}
         メールアドレス： {$post['email']}
+        郵便番号： {$post['zipcode']}
         住所1： {$post['address']}
         住所2： {$post['address2']}
         電話番号： {$post['tel']}
@@ -45,6 +46,7 @@
         名前： {$post['name']}
         ふりがな： {$post['kana']}
         メールアドレス： {$post['email']}
+        郵便番号： {$post['zipcode']}
         住所1： {$post['address']}
         住所2： {$post['address2']}
         電話番号： {$post['tel']}
@@ -95,6 +97,10 @@
                     <div class="wrap__item">
                         <label>Eメールアドレス</label>
                         <p><?php echo htmlspecialchars($post['email']); ?></p>
+                    </div>
+                    <div class="wrap__item">
+                        <label>郵便番号</label>
+                        <p><?php echo htmlspecialchars($post['zipcode']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>ご住所</label>

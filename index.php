@@ -17,6 +17,9 @@
         }else if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
             $errMessage['email'] = 'checkEmail';
         }
+        if($post['zipcode'] === '') {
+            $errMessage['zipcode'] = 'blank';
+        }
         if($post['address'] === '') {
             $errMessage['address'] = 'blank';
         }
@@ -105,6 +108,19 @@
                     <?php if($errMessage['email'] === 'checkEmail') : ?>
                     <div class="input__error">
                     <p>正しいEメールアドレスを入力してください。</p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="form__item input__text required">
+                    <div class="c-item-top">
+                        <span class="required__txt">必須</span>
+                        <label class="label" for="zipcode">郵便番号</label>
+                        <p class="input__sample">（例）4310431</p>
+                    </div>
+                    <input type="text" name="zipcode" id="zipcode" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','address','address');" value="<?php echo htmlspecialchars($post['zipcode']); ?>">
+                    <?php if($errMessage['zipcode'] === 'blank') : ?>
+                    <div class="input__error">
+                        <p>郵便番号を入力してください。</p>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -204,5 +220,6 @@
             </form>
         </div>
     </main>
+    <script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js"></script>
 </body>
 </html>
