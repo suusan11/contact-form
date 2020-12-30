@@ -125,6 +125,13 @@ PAGE - CONTACT INDEX
     margin: 0.5rem auto;
 }
 
+.form__select select {
+    width: 40%;
+    max-width: 250px;
+    height: 40px;
+    border: 1px solid #EBEBEB;
+}
+
 /* --------------------
 PAGE - CONFIRM
 -------------------- */

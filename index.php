@@ -23,6 +23,9 @@
         if($post['tel'] === '') {
             $errMessage['tel'] = 'blank';
         }
+        if($post['select'] === 'defalut') {
+            $errMessage['select'] = 'blank';
+        }
         if($post['message'] === '') {
             $errMessage['message'] = 'blank';
         }
@@ -130,6 +133,24 @@
                     <?php if($errMessage['tel'] === 'blank') : ?>
                     <div class="input__error">
                         <p>電話番号を入力してください。</p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="form__item form__select required">
+                    <div class="c-item-top">
+                        <span class="required__txt">必須</span>
+                        <label for="select">好きな色</label>
+                    </div>
+                    <select name="select">
+                        <option value="defalut">選択してください</option>
+                        <option value="赤" <?php if($post['select'] === '赤') { echo 'selected'; } ?>>赤</option>
+                        <option value="ピンク" <?php if($post['select'] === 'ピンク') { echo 'selected'; } ?>>ピンク</option>
+                        <option value="青" <?php if($post['select'] === '青') { echo 'selected'; } ?>>青</option>
+                        <option value="黄色" <?php if($post['select'] === '黄色') { echo 'selected'; } ?>>黄色</option>
+                    </select>
+                    <?php if($errMessage['select'] === 'blank') : ?>
+                    <div class="input__error">
+                    <p>選択してください。</p>
                     </div>
                     <?php endif; ?>
                 </div>

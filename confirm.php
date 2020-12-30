@@ -28,6 +28,7 @@
         住所1： {$post['address']}
         住所2： {$post['address2']}
         電話番号： {$post['tel']}
+        好きな色： {$post['select']}
         問い合わせ内容： {$post['message']}
         EOT;
 
@@ -43,6 +44,7 @@
         住所1： {$post['address']}
         住所2： {$post['address2']}
         電話番号： {$post['tel']}
+        好きな色： {$post['select']}
         問い合わせ内容： {$post['message']}
         EOT;
 
@@ -99,6 +101,10 @@
                     <div class="wrap__item">
                         <label>電話番号</label>
                         <p><?php echo htmlspecialchars($post['tel']); ?></p>
+                    </div>
+                    <div class="wrap__item">
+                        <label>好きな色</label>
+                        <p><?php echo htmlspecialchars($post['select']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>お問い合わせの概要</label>
