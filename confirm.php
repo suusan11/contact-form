@@ -15,6 +15,8 @@
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         //送信ボタンが押されたら、問い合わせ確認メールを送信する
 
+        $check = implode( ', ', $post['check'] );
+
         //自動返信
         $to1 = $post['email'];
         $from1 = 'info@example.com';
@@ -29,6 +31,8 @@
         住所2： {$post['address2']}
         電話番号： {$post['tel']}
         好きな色： {$post['select']}
+        好きなお寿司： {$check}
+        今日の天気： {$post['radio']}
         問い合わせ内容： {$post['message']}
         EOT;
 
@@ -45,6 +49,8 @@
         住所2： {$post['address2']}
         電話番号： {$post['tel']}
         好きな色： {$post['select']}
+        好きなお寿司： {$check}
+        今日の天気： {$post['radio']}
         問い合わせ内容： {$post['message']}
         EOT;
 
@@ -107,10 +113,14 @@
                         <p><?php echo htmlspecialchars($post['select']); ?></p>
                     </div>
                     <div class="wrap__item">
-                        <label>今日の天気</label>
+                        <label>好きなお寿司</label>
                         <?php for($i = 0; $i < count($post['check']); $i++) : ?>
                         <p><?php echo htmlspecialchars($post['check'][$i]); ?></p>
                         <?php endfor;?>
+                    </div>
+                    <div class="wrap__item">
+                        <label>今日の天気</label>
+                        <p><?php echo htmlspecialchars($post['radio']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>お問い合わせの概要</label>

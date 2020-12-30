@@ -29,6 +29,9 @@
         if(empty($post['check'])) { //配列が空だったら
             $errMessage['check'] = 'blank';
         }
+        if(empty($post['radio'])) {
+            $errMessage['radio'] = 'blank';
+        }
         if($post['message'] === '') {
             $errMessage['message'] = 'blank';
         }
@@ -146,10 +149,10 @@
                     </div>
                     <select name="select" id="select">
                         <option value="defalut">選択してください</option>
-                        <option value="赤" <?php if($post['select'] === '赤') { echo 'selected'; } ?>>赤</option>
-                        <option value="ピンク" <?php if($post['select'] === 'ピンク') { echo 'selected'; } ?>>ピンク</option>
-                        <option value="青" <?php if($post['select'] === '青') { echo 'selected'; } ?>>青</option>
-                        <option value="黄色" <?php if($post['select'] === '黄色') { echo 'selected'; } ?>>黄色</option>
+                        <option value="赤" <?php if(isset($post['select']) && $post['select'] === '赤') echo 'selected'; ?>>赤</option>
+                        <option value="ピンク" <?php if(isset($post['select']) && $post['select'] === 'ピンク') echo 'selected'; ?>>ピンク</option>
+                        <option value="青" <?php if(isset($post['select']) && $post['select'] === '青') echo 'selected'; ?>>青</option>
+                        <option value="黄色" <?php if(isset($post['select']) && $post['select'] === '黄色') echo 'selected'; ?>>黄色</option>
                     </select>
                     <?php if($errMessage['select'] === 'blank') : ?>
                     <div class="input__error">
@@ -162,10 +165,24 @@
                         <span class="required__txt">必須</span>
                         <label>好きなお寿司</label>
                     </div>
-                    <input type="checkbox" name="check[]" value="まぐろ" id="check1" <?php if(in_array('まぐろ', $post['check'])) { echo 'checked'; } ?>><label for="check1">まぐろ</label>
-                    <input type="checkbox" name="check[]" value="たい" id="check2" <?php if(in_array('たい', $post['check'])) { echo 'checked'; } ?>><label for="check2">たい</label>
-                    <input type="checkbox" name="check[]" value="たこ" id="check3" <?php if(in_array('たこ', $post['check'])) { echo 'checked'; } ?>><label for="check3">たこ</label>
+                    <input type="checkbox" name="check[]" value="まぐろ" id="check1" <?php if(isset($post['check']) && in_array('まぐろ', $post['check'])) echo 'checked'; ?>><label for="check1">まぐろ</label>
+                    <input type="checkbox" name="check[]" value="たい" id="check2" <?php if(isset($post['check']) && in_array('たい', $post['check'])) echo 'checked'; ?>><label for="check2">たい</label>
+                    <input type="checkbox" name="check[]" value="たこ" id="check3" <?php if(isset($post['check']) && in_array('たこ', $post['check'])) echo 'checked'; ?>><label for="check3">たこ</label>
                     <?php if($errMessage['check'] === 'blank') : ?>
+                    <div class="input__error">
+                    <p>チェックしてください。</p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="form__item form__radio required">
+                    <div class="c-item-top">
+                        <span class="required__txt">必須</span>
+                        <label>今日の天気</label>
+                    </div>
+                    <input type="radio" name="radio" value="晴れ" id="radio1" <?php if(isset($post['radio']) && $post['radio'] === '晴れ') echo 'checked'; ?>><label for="radio1">晴れ</label>
+                    <input type="radio" name="radio" value="くもり" id="radio2" <?php if(isset($post['radio']) && $post['radio'] === 'くもり') echo 'checked'; ?>><label for="radio2">くもり</label>
+                    <input type="radio" name="radio" value="雨" id="radio3" <?php if(isset($post['radio']) && $post['radio'] === '雨') echo 'checked'; ?>><label for="radio3">雨</label>
+                    <?php if($errMessage['radio'] === 'blank') : ?>
                     <div class="input__error">
                     <p>チェックしてください。</p>
                     </div>
