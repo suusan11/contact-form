@@ -62,7 +62,7 @@
 
 
         //受付メール
-        $to2 = 'gawow11@gmail.com';
+        $to2 = 'info@example.com';
         $from2 = 'From: '.$post['email'];
         $subject2 = 'ホームページよりお問合せを受け付けました。';
         $body2 = <<<EOT
