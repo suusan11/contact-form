@@ -9,7 +9,7 @@
         exit();
     }else {
         //indexで渡されたフォームの内容を再度変数に入れる
-        $post = $_SESSION['form'];
+        $_POST = $_SESSION['form'];
     }
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,10 +22,10 @@
         $from_address = 'info@example.com';
 
         //セパレートチェックボックスアイテム
-        $check = implode( ', ', $post['check'] );
+        $check = implode( ', ', $_POST['check'] );
 
         //自動返信
-        $to1 = $post['email'];
+        $to1 = $_POST['email'];
         $from1 = "From: ".$from_name.$from_address;
         $subject1 = 'お問い合わせありがとうございます';
         $body1 = <<<EOT
@@ -35,17 +35,17 @@
         以下の内容で送信いたしました。
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-        名前： {$post['name']}
-        ふりがな： {$post['kana']}
-        メールアドレス： {$post['email']}
-        郵便番号： {$post['zipcode']}
-        住所1： {$post['address']}
-        住所2： {$post['address2']}
-        電話番号： {$post['tel']}
-        好きな色： {$post['select']}
+        名前： {$_POST['namae']}
+        ふりがな： {$_POST['kana']}
+        メールアドレス： {$_POST['email']}
+        郵便番号： {$_POST['zipcode']}
+        住所1： {$_POST['address']}
+        住所2： {$_POST['address2']}
+        電話番号： {$_POST['tel']}
+        好きな色： {$_POST['select']}
         好きなお寿司： {$check}
-        今日の天気： {$post['radio']}
-        問い合わせ内容： {$post['message']}
+        今日の天気： {$_POST['radio']}
+        問い合わせ内容： {$_POST['message']}
 
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -62,24 +62,24 @@
 
 
         //受付メール
-        $to2 = 'info@example.com';
-        $from2 = 'From: '.$post['email'];
+        $to2 = 'example@***.com';
+        $from2 = 'From: '.$_POST['email'];
         $subject2 = 'ホームページよりお問合せを受け付けました。';
         $body2 = <<<EOT
         お問い合わせ内容
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-        名前： {$post['name']}
-        ふりがな： {$post['kana']}
-        メールアドレス： {$post['email']}
-        郵便番号： {$post['zipcode']}
-        住所1： {$post['address']}
-        住所2： {$post['address2']}
-        電話番号： {$post['tel']}
-        好きな色： {$post['select']}
+        名前： {$_POST['namae']}
+        ふりがな： {$_POST['kana']}
+        メールアドレス： {$_POST['email']}
+        郵便番号： {$_POST['zipcode']}
+        住所1： {$_POST['address']}
+        住所2： {$_POST['address2']}
+        電話番号： {$_POST['tel']}
+        好きな色： {$_POST['select']}
         好きなお寿司： {$check}
-        今日の天気： {$post['radio']}
-        問い合わせ内容： {$post['message']}
+        今日の天気： {$_POST['radio']}
+        問い合わせ内容： {$_POST['message']}
 
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         EOT;
@@ -116,49 +116,49 @@
                 <div class="wrap__inner">
                     <div class="wrap__item">
                         <label>お名前</label>
-                        <p><?php echo htmlspecialchars($post['name']); ?></p>
+                        <p><?php echo htmlspecialchars(@$_POST['namae']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>ふりがな</label>
-                        <p><?php echo htmlspecialchars($post['kana']); ?></p>
+                        <p><?php echo htmlspecialchars(@$_POST['kana']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>Eメールアドレス</label>
-                        <p><?php echo htmlspecialchars($post['email']); ?></p>
+                        <p><?php echo htmlspecialchars(@$_POST['email']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>郵便番号</label>
-                        <p><?php echo htmlspecialchars($post['zipcode']); ?></p>
+                        <p><?php echo htmlspecialchars(@$_POST['zipcode']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>ご住所</label>
-                        <p><?php echo htmlspecialchars($post['address']); ?></p>
+                        <p><?php echo htmlspecialchars(@$_POST['address']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>建物名</label>
-                        <p><?php echo htmlspecialchars($post['address2']); ?></p>
+                        <p><?php echo htmlspecialchars(@$_POST['address2']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>電話番号</label>
-                        <p><?php echo htmlspecialchars($post['tel']); ?></p>
+                        <p><?php echo htmlspecialchars(@$_POST['tel']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>好きな色</label>
-                        <p><?php echo htmlspecialchars($post['select']); ?></p>
+                        <p><?php echo htmlspecialchars(@$_POST['select']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>好きなお寿司</label>
-                        <?php for($i = 0; $i < count($post['check']); $i++) : ?>
-                        <p><?php echo htmlspecialchars($post['check'][$i]); ?></p>
+                        <?php for($i = 0; $i < count($_POST['check']); $i++) : ?>
+                        <p><?php echo htmlspecialchars(@$_POST['check'][$i]); ?></p>
                         <?php endfor;?>
                     </div>
                     <div class="wrap__item">
                         <label>今日の天気</label>
-                        <p><?php echo htmlspecialchars($post['radio']); ?></p>
+                        <p><?php echo htmlspecialchars(@$_POST['radio']); ?></p>
                     </div>
                     <div class="wrap__item">
                         <label>お問い合わせの概要</label>
-                        <p><?php echo nl2br(htmlspecialchars($post['message'])); ?></p>
+                        <p><?php echo nl2br(htmlspecialchars(@$_POST['message'])); ?></p>
                     </div>
                 </div>
                 <a class="form__button button-gray" href="index.php">入力内容を変更する</a>
